@@ -63,13 +63,13 @@ void DefaultLogListener::logMessage(LogLevel level, const std::string & message)
 	case LOG_CONSOLE:
 	case LOG_SCRIPT_PRINT:
 	case LOG_INFO:
-		std::cout << message;
+		std::cout << message << std::endl;
 		break;
 
 	case LOG_WARN:
 	case LOG_ERROR:
 	case LOG_SCRIPT_ERROR:
-		std::cerr << message;
+		std::cerr << message << std::endl;
 		break;
 	}
 }
