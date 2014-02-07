@@ -6,6 +6,7 @@ DEFINES {
 	"LOGGER_H=\"" .. CURRENT_SOURCE_DIR .. "/logger.h\"",
 	"MACROS_H=\"" .. CURRENT_SOURCE_DIR .. "/macros.h\"",
 	"FMT_H=\"" .. CURRENT_SOURCE_DIR .. "/fmt.h\"",
+	"TYPES_H=\"" .. CURRENT_SOURCE_DIR .. "/types.h\"",
 }
 
 SOURCE_FILES {
@@ -15,4 +16,5 @@ SOURCE_FILES {
 	"logger.cpp",
 	"logger.h",
 	"macros.h",
+	"types.h",
 }
