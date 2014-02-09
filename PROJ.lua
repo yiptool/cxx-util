@@ -7,6 +7,7 @@ DEFINES {
 	"MACROS_H=\"" .. CURRENT_SOURCE_DIR .. "/macros.h\"",
 	"FMT_H=\"" .. CURRENT_SOURCE_DIR .. "/fmt.h\"",
 	"TYPES_H=\"" .. CURRENT_SOURCE_DIR .. "/types.h\"",
+	"UNORDERED_H=\"" .. CURRENT_SOURCE_DIR .. "/unordered.h\"",
 }
 
 SOURCE_FILES {
@@ -17,4 +18,5 @@ SOURCE_FILES {
 	"logger.h",
 	"macros.h",
 	"types.h",
+	"unordered.h"
 }
