@@ -23,7 +23,6 @@
 #include "logger.h"
 #include "assert.h"
 #include <iostream>
-#include <cassert>
 
 LogStream LogStream::DUMMY(LOG_DEBUG);
 DefaultLogListener DefaultLogListener::instance;
@@ -39,14 +38,18 @@ static LogListener * g_LogListeners[] =
 	&DefaultLogListener::instance,											/* LOG_ERROR */
 };
 
+static const size_t g_NumLogLevels = sizeof(g_LogListeners) / sizeof(g_LogListeners[0]);
+
 LogStream::~LogStream()
 {
-	if (UNLIKELY(this == &DUMMY))
+	if (LIKELY(this == &DUMMY))
 		return;
 
-	assert(m_Level >= 0 && static_cast<size_t>(m_Level) < sizeof(g_LogListeners) / sizeof(g_LogListeners[0]));
-	if (g_LogListeners[m_Level] != NULL)
-		g_LogListeners[m_Level]->logMessage((LogLevel)m_Level, this->str());
+	if (LIKELY(m_Level >= 0 && static_cast<size_t>(m_Level) < g_NumLogLevels))
+	{
+		if (UNLIKELY(g_LogListeners[m_Level] != NULL))
+			g_LogListeners[m_Level]->logMessage((LogLevel)m_Level, this->str());
+	}
 }
 
 NOINLINE void LogStream::release()
@@ -76,21 +79,30 @@ void DefaultLogListener::logMessage(LogLevel level, const std::string & message)
 
 void Log::setListener(LogLevel level, LogListener * listener)
 {
-	assert(level >= 0 && level < sizeof(g_LogListeners) / sizeof(g_LogListeners[0]));
-	g_LogListeners[level] = listener;
+	if (LIKELY(level >= 0 && level < g_NumLogLevels))
+		g_LogListeners[level] = listener;
 }
 
 void Log::write(LogLevel level, const std::string & message)
 {
-	assert(level >= 0 && level < sizeof(g_LogListeners) / sizeof(g_LogListeners[0]));
-	if (g_LogListeners[level])
+	if (UNLIKELY(level < 0))
+		level = LOG_DEBUG;
+	else if (UNLIKELY(level >= g_NumLogLevels))
+		level = LOG_ERROR;
+
+	if (UNLIKELY(g_LogListeners[level]))
 		g_LogListeners[level]->logMessage(level, message);
 }
 
 LogWriter Log::write(LogLevel level)
 {
-	assert(level >= 0 && level < sizeof(g_LogListeners) / sizeof(g_LogListeners[0]));
-	if (!g_LogListeners[level])
+	if (UNLIKELY(level < 0))
+		level = LOG_DEBUG;
+	else if (UNLIKELY(level >= g_NumLogLevels))
+		level = LOG_ERROR;
+
+	if (LIKELY(!g_LogListeners[level]))
 		return LogWriter(&LogStream::DUMMY);
+
 	return LogWriter(new LogStream(level));
 }
