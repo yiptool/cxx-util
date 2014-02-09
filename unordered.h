@@ -49,6 +49,13 @@
  #define UNORDERED_MAP stdext::hash_map
  #define UNORDERED_SET stdext::hash_set
  #define UNORDERED_HASH stdext::hash_compare
+ #define UNORDERED_HASH_FUNC(NAME, HASH) \
+	struct NAME { \
+		static const size_t bucket_size = 4; \
+		static const size_t min_buckets = 8; \
+		template <class TYPE> inline bool operator()(TYPE k1, TYPE k2) const { return k1 < k2; } \
+		template <class TYPE> inline size_t operator()(TYPE value) const { HASH; } \
+	};
 #else
  #include <map>
  #include <set>
@@ -56,6 +63,17 @@
  #define UNORDERED_MAP std::map
  #define UNORDERED_SET std::set
  #undef UNORDERED_HASH
+ #define UNORDERED_HASH_FUNC(NAME, HASH) \
+	struct NAME { \
+		template <class TYPE> inline bool operator()(TYPE k1, TYPE k2) const { return k1 < k2; } \
+	};
+#endif
+
+#ifndef UNORDERED_HASH_FUNC
+ #define UNORDERED_HASH_FUNC(NAME, HASH) \
+	struct NAME { \
+		template <class TYPE> inline size_t operator()(TYPE value) const { HASH; } \
+	};
 #endif
 
 #endif
