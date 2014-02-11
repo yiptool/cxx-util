@@ -37,7 +37,7 @@
  #define UNORDERED_MAP std::tr1::unordered_map
  #define UNORDERED_SET std::tr1::unordered_set
  #define UNORDERED_HASH std::tr1::hash
-#elif defined(_MSC_VER) && _MSC_VER >= 1500 /* Visual Studio 2008 */
+#elif defined(_MSC_VER) && _MSC_VER >= 1600 /* Visual Studio 2010 */
  #include <unordered_map>
  #include <unordered_set>
  #define UNORDERED_MAP std::tr1::unordered_map
