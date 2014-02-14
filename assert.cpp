@@ -38,7 +38,7 @@ NOINLINE static std::string reportAssertionFailure(const char * file, int line, 
 	return msg;
 }
 
-NOINLINE NORETURN void assertionFailed(const char * file, int line, const char * expr)
+NOINLINE NORETURN void assertionFailed(const char * file, int line, const char * expr) throw(std::exception)
 {
 	throw std::runtime_error(reportAssertionFailure(file, line, expr));
 }

@@ -24,6 +24,7 @@
 #define __5c9e7207c3699f140b789c52819bb6d4__
 
 #include "macros.h"
+#include <exception>
 
 #ifdef DISABLE_ASSERTIONS
  #define ASSERT(x) ((void)0)
@@ -39,7 +40,7 @@
 
 EXTERN_C_BEGIN
 
-NOINLINE NORETURN void assertionFailed(const char * file, int line, const char * expr);
+NOINLINE NORETURN void assertionFailed(const char * file, int line, const char * expr) throw(std::exception);
 NOINLINE void assertionFailedNonFatal(const char * file, int line, const char * expr);
 
 EXTERN_C_END
