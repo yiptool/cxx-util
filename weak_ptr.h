@@ -32,17 +32,17 @@ template <class TYPE> class WeakPtr : public RefCountedObject::WeakPtr
 public:
 	inline WeakPtr() {}
 	inline WeakPtr(TYPE * p) : RefCountedObject::WeakPtr(p, p) {}
-	inline WeakPtr(const WeakPtr & s) : RefCountedObject::WeakPtr(s.get(), s.m_Pointer) {}
+	inline WeakPtr(const WeakPtr & s) : RefCountedObject::WeakPtr(s.get_(), s.m_Pointer) {}
 	template <class T> inline WeakPtr(T * p) : RefCountedObject::WeakPtr(p, p) {}
 	template <class T> inline WeakPtr(const StrongPtr<T> & s) : RefCountedObject::WeakPtr(s.get(), s.get()) {}
-	template <class T> inline WeakPtr(const WeakPtr<T> & s) : RefCountedObject::WeakPtr(s.get(), s.m_Pointer) {}
+	template <class T> inline WeakPtr(const WeakPtr<T> & s) : RefCountedObject::WeakPtr(s.get_(), s.m_Pointer) {}
 	inline ~WeakPtr() {}
 
 	inline WeakPtr & operator=(TYPE * p) { set(p, p); return *this; }
-	inline WeakPtr & operator=(const WeakPtr & s) { set(s.get(), s.m_Pointer); return *this; }
+	inline WeakPtr & operator=(const WeakPtr & s) { set(s.get_(), s.m_Pointer); return *this; }
 	template <class T> inline WeakPtr & operator=(T * p) { set(p, p); return *this; }
 	template <class T> inline WeakPtr & operator=(const StrongPtr<T> & s) { set(s.get(), s.get()); return *this; }
-	template <class T> inline WeakPtr & operator=(const WeakPtr<T> & s) { set(s.get(), s.m_Pointer); return *this; }
+	template <class T> inline WeakPtr & operator=(const WeakPtr<T> & s) { set(s.get_(), s.m_Pointer); return *this; }
 
 	inline bool isNull() const { return !m_Pointer; }
 	inline bool operator!() const { return !m_Pointer; }
