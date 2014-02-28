@@ -54,6 +54,20 @@ public:
 	inline TYPE * operator->() const { ASSERT(m_Ptr != NULL); return m_Ptr; }
 	inline TYPE & operator*() const { ASSERT(m_Ptr != NULL); return *m_Ptr; }
 
+	inline bool operator==(const TYPE * p) const { return m_Ptr == p; }
+	inline bool operator==(const StrongPtr<TYPE> & s) const { return m_Ptr == s.m_Ptr; }
+	inline bool operator==(const WeakPtr<TYPE> & s) const { return m_Ptr == s.get_(); }
+	template <class T> inline bool operator==(const T * p) const { return m_Ptr == p; }
+	template <class T> inline bool operator==(const StrongPtr<T> & s) const { return m_Ptr == s.m_Ptr; }
+	template <class T> inline bool operator==(const WeakPtr<T> & s) const { return m_Ptr == s.get_(); }
+
+	inline bool operator!=(const TYPE * p) const { return m_Ptr != p; }
+	inline bool operator!=(const StrongPtr<TYPE> & s) const { return m_Ptr != s.m_Ptr; }
+	inline bool operator!=(const WeakPtr<TYPE> & s) const { return m_Ptr != s.get_(); }
+	template <class T> inline bool operator!=(const T * p) const { return m_Ptr != p; }
+	template <class T> inline bool operator!=(const StrongPtr<T> & s) const { return m_Ptr != s.m_Ptr; }
+	template <class T> inline bool operator!=(const WeakPtr<T> & s) const { return m_Ptr != s.get_(); }
+
 private:
 	TYPE * m_Ptr;
 
