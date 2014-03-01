@@ -29,24 +29,34 @@
 class RefCountedObject
 {
 public:
-	class WeakPtr
+	class WeakPtr;
+
+	struct WeakPtrBase
 	{
 	protected:
 		void * m_Pointer;
 
-		WeakPtr();
-		WeakPtr(RefCountedObject * object, void * pointer);
-		~WeakPtr();
-
 		void set(RefCountedObject * object, void * pointer);
 
 	private:
-		WeakPtr * m_Next;
-		WeakPtr * m_Prev;
+		WeakPtrBase * m_Next;
+		WeakPtrBase * m_Prev;
 
 		void attach(RefCountedObject * object);
 		void detach();
 
+		friend class WeakPtr;
+		friend class RefCountedObject;
+	};
+
+	class WeakPtr : public WeakPtrBase
+	{
+	protected:
+		WeakPtr();
+		WeakPtr(RefCountedObject * object, void * pointer);
+		~WeakPtr();
+
+	private:
 		WeakPtr(const WeakPtr & src);
 		WeakPtr & operator=(const WeakPtr & src);
 
@@ -69,6 +79,9 @@ protected:
 private:
 	int m_RefCount;
 	WeakPtr m_WeakPtrs;
+
+	friend class WeakPtr;
+	friend struct WeakPtrBase;
 };
 
 #endif

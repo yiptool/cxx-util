@@ -22,34 +22,16 @@
 //
 #include "ref_counted_object.h"
 
-/* RefCountedObject::WeakPtr */
+/* RefCountedObject::WeakPtrBase */
 
-RefCountedObject::WeakPtr::WeakPtr()
-	: m_Pointer(NULL)
-{
-	m_Next = this;
-	m_Prev = this;
-}
-
-RefCountedObject::WeakPtr::WeakPtr(RefCountedObject * object, void * pointer)
-	: m_Pointer(pointer)
-{
-	attach(object);
-}
-
-RefCountedObject::WeakPtr::~WeakPtr()
-{
-	detach();
-}
-
-void RefCountedObject::WeakPtr::set(RefCountedObject * object, void * pointer)
+void RefCountedObject::WeakPtrBase::set(RefCountedObject * object, void * pointer)
 {
 	detach();
 	m_Pointer = pointer;
 	attach(object);
 }
 
-void RefCountedObject::WeakPtr::attach(RefCountedObject * object)
+void RefCountedObject::WeakPtrBase::attach(RefCountedObject * object)
 {
 	if (!object)
 	{
@@ -65,12 +47,33 @@ void RefCountedObject::WeakPtr::attach(RefCountedObject * object)
 	}
 }
 
-void RefCountedObject::WeakPtr::detach()
+void RefCountedObject::WeakPtrBase::detach()
 {
 	m_Next->m_Prev = m_Prev;
 	m_Prev->m_Next = m_Next;
 	m_Next = this;
 	m_Prev = this;
+}
+
+
+/* RefCountedObject::WeakPtr */
+
+RefCountedObject::WeakPtr::WeakPtr()
+{
+	m_Pointer = NULL;
+	m_Next = this;
+	m_Prev = this;
+}
+
+RefCountedObject::WeakPtr::WeakPtr(RefCountedObject * object, void * pointer)
+{
+	m_Pointer = pointer;
+	attach(object);
+}
+
+RefCountedObject::WeakPtr::~WeakPtr()
+{
+	detach();
 }
 
 
@@ -89,7 +92,7 @@ RefCountedObject::RefCountedObject(const RefCountedObject &)
 RefCountedObject::~RefCountedObject()
 {
 	ASSERT(m_RefCount == 0);
-	for (WeakPtr * n, * p = m_WeakPtrs.m_Next; p != &m_WeakPtrs; p = n)
+	for (WeakPtrBase * n, * p = m_WeakPtrs.m_Next; p != &m_WeakPtrs; p = n)
 	{
 		n = p->m_Next;
 		p->m_Pointer = NULL;
