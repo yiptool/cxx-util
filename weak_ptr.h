@@ -52,6 +52,7 @@ public:
 private:
 	inline TYPE * get_() const { return reinterpret_cast<TYPE *>(m_Pointer); }
 
+	template <class T> friend class WeakPtr;
 	template <class T> friend class StrongPtr;
 };
 

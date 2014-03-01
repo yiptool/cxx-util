@@ -101,6 +101,9 @@ private:
 
 	void retain() { if (m_Ptr) m_Ptr->retain(); }
 	void set(TYPE * p) { if (p) p->retain(); if (m_Ptr) m_Ptr->release(); m_Ptr = p; }
+
+	template <class T> friend class WeakPtr;
+	template <class T> friend class StrongPtr;
 };
 
 #endif
