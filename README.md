@@ -1,17 +1,18 @@
 
-Util
-====
-
-This is the small library of auxiliary functions and classes for the C++ language.
-
-
-Building
+C++ Util
 ========
 
+This is the small library of auxiliary macros, functions and classes for the
+C++ language.
+
+
+Compiling this library
+----------------------
+
 This library is not intended to be built directly. Instead it is supposed
-to be included into projects using the *buildtool*. Please consult the
-[buildtool](https://github.com/zapolnov/buildtool) documentation for more
-information.
+to be included into projects using the [Yip](https://github.com/zapolnov/yip.git).
+
+Use the `import cxx-util` directive in your `Yipfile` to use this library.
 
 
 License
