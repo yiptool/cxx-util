@@ -25,4 +25,10 @@ public_headers
 	cxx-util/fmt.h
 	cxx-util/macros.h
 	cxx-util/make_ptr.h
+	cxx-util/unhex.h
+}
+
+sources
+{
+	cxx-util/unhex.cpp
 }
