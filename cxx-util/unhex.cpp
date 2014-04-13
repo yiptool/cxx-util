@@ -36,3 +36,12 @@ int unhex(char ch)
 		return -1;
 	}
 }
+
+int unhex2(char ch1, char ch2)
+{
+	int hex1 = unhex(ch1);
+	int hex2 = unhex(ch2);
+	if (hex1 < 0 || hex2 < 0)
+		return -1;
+	return (hex1 << 4) | hex2;
+}

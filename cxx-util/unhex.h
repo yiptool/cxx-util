@@ -30,4 +30,12 @@
  */
 int unhex(char ch);
 
+/**
+ * Converts hexadecimal number containing two digits into it's numeric value.
+ * @param ch1 First (highest) hexadecimal digit.
+ * @param ch2 Second (lowest) hexadecimal digit.
+ * @returns numeric value (0 to 255) or -1 if at least one of the characters is not a hexadecimal digit.
+ */
+int unhex2(char ch1, char ch2);
+
 #endif
