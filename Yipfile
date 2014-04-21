@@ -22,6 +22,7 @@ THE SOFTWARE."
 
 public_headers
 {
+	cxx-util/explode.h
 	cxx-util/fmt.h
 	cxx-util/macros.h
 	cxx-util/make_ptr.h
@@ -30,5 +31,6 @@ public_headers
 
 sources
 {
+	cxx-util/explode.cpp
 	cxx-util/unhex.cpp
 }
