@@ -24,13 +24,17 @@ public_headers
 {
 	cxx-util/explode.h
 	cxx-util/fmt.h
+	cxx-util/is_whitespace.h
 	cxx-util/macros.h
 	cxx-util/make_ptr.h
+	cxx-util/trim.h
 	cxx-util/unhex.h
 }
 
 sources
 {
 	cxx-util/explode.cpp
+	cxx-util/is_whitespace.cpp
+	cxx-util/trim.cpp
 	cxx-util/unhex.cpp
 }
