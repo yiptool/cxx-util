@@ -20,21 +20,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 //
-#include "explode.h"
-#include "on_scope_exit.h"
+#ifndef __e24c2ddd06a4c0b92cf1927bcb674fb9__
+#define __e24c2ddd06a4c0b92cf1927bcb674fb9__
 
-std::vector<std::string> explode(const std::string & str, char separator)
+#include <functional>
+
+class OnScopeExit
 {
-	std::vector<std::string> result;
-	size_t npos, pos = 0;
+public:
+	inline OnScopeExit(const std::function<void()> onExit) : m_OnExit(onExit) {}
+	inline ~OnScopeExit() { m_OnExit(); }
 
-	do
-	{
-		npos = str.find(separator, pos);
-		result.push_back(str.substr(pos, npos != std::string::npos ? npos - pos : std::string::npos));
-		pos = npos + 1;
-	}
-	while (npos != std::string::npos);
+private:
+	std::function<void()> m_OnExit;
 
-	return result;
-}
+	OnScopeExit(const OnScopeExit &) = delete;
+	OnScopeExit & operator=(const OnScopeExit &) = delete;
+};
+
+#endif

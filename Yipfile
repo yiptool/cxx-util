@@ -27,6 +27,7 @@ public_headers
 	cxx-util/is_whitespace.h
 	cxx-util/macros.h
 	cxx-util/make_ptr.h
+	cxx-util/on_scope_exit.h
 	cxx-util/trim.h
 	cxx-util/unhex.h
 }
