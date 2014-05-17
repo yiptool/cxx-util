@@ -71,4 +71,6 @@
  #define DLLEXPORT
 #endif
 
+#define STATIC_ASSERT(x) static_assert(x, #x)
+
 #endif
