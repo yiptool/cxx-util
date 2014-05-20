@@ -31,7 +31,7 @@ std::string ltrim(const std::string & str)
 	while (p < end && isWhitespace(*p))
 		++p;
 
-	return std::string(p, end - p);
+	return std::string(p, size_t(end - p));
 }
 
 std::string rtrim(const std::string & str)
@@ -42,7 +42,7 @@ std::string rtrim(const std::string & str)
 	while (end > p && isWhitespace(end[-1]))
 		--end;
 
-	return std::string(p, end - p);
+	return std::string(p, size_t(end - p));
 }
 
 std::string trim(const std::string & str)
@@ -56,5 +56,5 @@ std::string trim(const std::string & str)
 	while (end < p && isWhitespace(end[-1]))
 		--end;
 
-	return std::string(p, end - p);
+	return std::string(p, size_t(end - p));
 }
