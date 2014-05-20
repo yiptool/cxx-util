@@ -21,6 +21,7 @@
 // THE SOFTWARE.
 //
 #include "replace.h"
+#include <sstream>
 
 std::string replace(const std::string & str, char what, const std::string & replacement)
 {
@@ -29,7 +30,7 @@ std::string replace(const std::string & str, char what, const std::string & repl
 
 	for (;;)
 	{
-		size_t off = str.find(pos, what);
+		size_t off = str.find(what, pos);
 		if (off == std::string::npos)
 		{
 			if (pos == 0)
