@@ -71,6 +71,10 @@
  #define DLLEXPORT
 #endif
 
+#ifdef _MSC_VER
+ #define noexcept NOTHROW
+#endif
+
 #define STATIC_ASSERT(x) static_assert(x, #x)
 
 #endif
