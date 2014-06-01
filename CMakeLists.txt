@@ -8,6 +8,7 @@ ADD_LIBRARY(cxx-util STATIC
 	cxx-util/macros.h
 	cxx-util/make_ptr.h
 	cxx-util/on_scope_exit.h
+	cxx-util/pool_allocator.h
 	cxx-util/replace.cpp
 	cxx-util/replace.h
 	cxx-util/trim.cpp

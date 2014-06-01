@@ -21,6 +21,7 @@
 // THE SOFTWARE.
 //
 #include "type_info.h"
+#include "pool_allocator.h"
 
 #ifdef __GNUG__
 
