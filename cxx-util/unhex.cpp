@@ -22,7 +22,7 @@
 //
 #include "unhex.h"
 
-int unhex(char ch)
+FCONST int unhex(char ch) noexcept
 {
 	switch (ch)
 	{
@@ -37,7 +37,7 @@ int unhex(char ch)
 	}
 }
 
-int unhex2(char ch1, char ch2)
+FCONST int unhex2(char ch1, char ch2) noexcept
 {
 	int hex1 = unhex(ch1);
 	int hex2 = unhex(ch2);

@@ -22,7 +22,7 @@
 //
 #include "is_whitespace.h"
 
-bool isWhitespace(char ch)
+FCONST bool isWhitespace(char ch) noexcept
 {
 	switch (ch)
 	{

@@ -23,12 +23,14 @@
 #ifndef __1c3c04cabe377d3f2a151946679a4079__
 #define __1c3c04cabe377d3f2a151946679a4079__
 
+#include "macros.h"
+
 /**
  * Converts given hexadecimal digit into it's numeric value.
  * @param ch Hexadecimal digit.
  * @returns numeric value of the digit (0 to 15) or -1 if given character is not a hexadecimal digit.
  */
-int unhex(char ch);
+FCONST int unhex(char ch) noexcept;
 
 /**
  * Converts hexadecimal number containing two digits into it's numeric value.
@@ -36,6 +38,6 @@ int unhex(char ch);
  * @param ch2 Second (lowest) hexadecimal digit.
  * @returns numeric value (0 to 255) or -1 if at least one of the characters is not a hexadecimal digit.
  */
-int unhex2(char ch1, char ch2);
+FCONST int unhex2(char ch1, char ch2) noexcept;
 
 #endif

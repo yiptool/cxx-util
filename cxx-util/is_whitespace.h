@@ -23,6 +23,8 @@
 #ifndef __b1ae2244212a22d0d18d88c0874eca6e__
 #define __b1ae2244212a22d0d18d88c0874eca6e__
 
-bool isWhitespace(char ch);
+#include "macros.h"
+
+FCONST bool isWhitespace(char ch) noexcept;
 
 #endif
