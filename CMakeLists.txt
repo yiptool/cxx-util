@@ -12,6 +12,8 @@ ADD_LIBRARY(cxx-util STATIC
 	cxx-util/replace.h
 	cxx-util/trim.cpp
 	cxx-util/trim.h
+	cxx-util/type_info.cpp
+	cxx-util/type_info.h
 	cxx-util/unhex.cpp
 	cxx-util/unhex.h
 	cxx-util/write_file.cpp
