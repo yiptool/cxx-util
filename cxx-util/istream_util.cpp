@@ -41,5 +41,8 @@ size_t istream_read(std::istream & stream, void * buf, size_t size)
 	}
 	while (size > 0);
 
+	if (stream.eof())
+		stream.clear(stream.rdstate() & ~(std::ios_base::badbit | std::ios_base::failbit));
+
 	return totalBytesRead;
 }
