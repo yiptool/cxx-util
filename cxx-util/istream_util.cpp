@@ -21,8 +21,29 @@
 // THE SOFTWARE.
 //
 #include "istream_util.h"
+#include "macros.h"
+#include <stdexcept>
+
+void istream_check_error(std::istream & stream, const char * message)
+{
+	if (UNLIKELY(stream.bad() || stream.fail()))
+		throw std::runtime_error(message);
+}
+
+void istream_check_error(std::istream & stream, const std::string & message)
+{
+	if (UNLIKELY(stream.bad() || stream.fail()))
+		throw std::runtime_error(message);
+}
 
 size_t istream_read(std::istream & stream, void * buf, size_t size)
+{
+	size_t bytesRead = istream_read(stream, buf, size, std::nothrow);
+	istream_check_error(stream, "read failed.");
+	return bytesRead;
+}
+
+size_t istream_read(std::istream & stream, void * buf, size_t size, const std::nothrow_t &)
 {
 	char * p = reinterpret_cast<char *>(buf);
 	size_t totalBytesRead = 0;
@@ -32,8 +53,13 @@ size_t istream_read(std::istream & stream, void * buf, size_t size)
 		if (stream.eof() || stream.bad() || stream.fail())
 			break;
 
+		std::ios_base::iostate state = stream.rdstate();
+
 		stream.read(p, static_cast<std::streamsize>(size));
 		size_t bytesRead = static_cast<size_t>(stream.gcount());
+
+		if (stream.eof())
+			stream.clear(state | std::ios_base::eofbit);
 
 		totalBytesRead += bytesRead;
 		p += bytesRead;
@@ -41,8 +67,22 @@ size_t istream_read(std::istream & stream, void * buf, size_t size)
 	}
 	while (size > 0);
 
-	if (stream.eof())
-		stream.clear(stream.rdstate() & ~(std::ios_base::badbit | std::ios_base::failbit));
-
 	return totalBytesRead;
+}
+
+void istream_seek(std::istream & stream, std::streamoff off, std::ios_base::seekdir dir)
+{
+	istream_seek(stream, off, dir, std::nothrow);
+	istream_check_error(stream, "seek failed.");
+}
+
+void istream_seek(std::istream & stream, std::streamoff off, std::ios_base::seekdir dir, const std::nothrow_t &)
+{
+	std::ios_base::iostate state = stream.rdstate();
+	stream.clear(state & ~std::ios_base::eofbit);
+
+	stream.seekg(off, dir);
+
+	if (stream.eof())
+		stream.clear(state | std::ios_base::eofbit);
 }

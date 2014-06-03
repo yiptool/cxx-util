@@ -23,9 +23,18 @@
 #ifndef __4db90c97f9195ddc01cce53c71f8d602__
 #define __4db90c97f9195ddc01cce53c71f8d602__
 
+#include <new>
+#include <utility>
 #include <istream>
 #include <cstddef>
 
+void istream_check_error(std::istream & stream, const char * message);
+void istream_check_error(std::istream & stream, const std::string & message);
+
 size_t istream_read(std::istream & stream, void * buf, size_t size);
+size_t istream_read(std::istream & stream, void * buf, size_t size, const std::nothrow_t &);
+
+void istream_seek(std::istream & stream, std::streamoff off, std::ios_base::seekdir dir);
+void istream_seek(std::istream & stream, std::streamoff off, std::ios_base::seekdir dir, const std::nothrow_t &);
 
 #endif
