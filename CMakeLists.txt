@@ -5,6 +5,8 @@ ADD_LIBRARY(cxx-util STATIC
 	cxx-util/fmt.h
 	cxx-util/is_whitespace.cpp
 	cxx-util/is_whitespace.h
+	cxx-util/istream_util.cpp
+	cxx-util/istream_util.h
 	cxx-util/macros.h
 	cxx-util/make_ptr.h
 	cxx-util/on_scope_exit.h

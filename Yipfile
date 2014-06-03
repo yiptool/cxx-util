@@ -25,6 +25,7 @@ public_headers
 	cxx-util/explode.h
 	cxx-util/fmt.h
 	cxx-util/is_whitespace.h
+	cxx-util/istream_util.h
 	cxx-util/macros.h
 	cxx-util/make_ptr.h
 	cxx-util/on_scope_exit.h
@@ -40,6 +41,7 @@ sources
 {
 	cxx-util/explode.cpp
 	cxx-util/is_whitespace.cpp
+	cxx-util/istream_util.cpp
 	cxx-util/replace.cpp
 	cxx-util/trim.cpp
 	cxx-util/type_info.cpp
